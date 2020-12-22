@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class IConnectImpl implements IConnect{
@@ -13,6 +14,8 @@ public class IConnectImpl implements IConnect{
 	public PreparedStatement psmt;
 	//오라클의 함수/프로시저를 실행하기 위한 객체
 	public CallableStatement csmt; //☆추가!
+	//정적쿼리 처리를 위한 객체
+	public Statement stmt;
 	
 	public Connection con; //연결
 	public ResultSet rs; //결과반환용
@@ -77,6 +80,7 @@ public class IConnectImpl implements IConnect{
 	public void close() {
 		try {
 			if(con!=null) con.close();
+			if(stmt!=null) stmt.close();
 			if(psmt!=null) psmt.close();
 			if(rs!=null) rs.close();
 			System.out.println("자원 반납 완료");
